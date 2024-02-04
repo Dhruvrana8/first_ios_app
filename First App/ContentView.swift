@@ -8,14 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    let carouselImages = ["Boy", "Dhruv"]
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            TabView {
+                        ForEach(carouselImages, id: \.self) { imageName in
+                            Image(imageName)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                                .tag(imageName)
+                                .ignoresSafeArea()
+                        }
+                    }
+                    .tabViewStyle(PageTabViewStyle())
+                    .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always)).ignoresSafeArea()
+            VStack{
+                Spacer()
+                Text("My First App !!")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.white)
+            }
         }
-        .padding()
     }
 }
 
